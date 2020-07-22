@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# create a name for this build (uuidgen was used during the dev cycle)
+uuid="LPD433" #$(uuidgen)
+
+# create a build dir to put the program into (silence output, if the dir already exist, fine)
+mkdir build > /dev/null 2>&1
+
+# - compile c-files into program:
+# find all the files in the current directory with extension "c",
+# and pass them to the gcc command. Set as output the first argument
+# given to this script
+
+find . -type f -name "*.c" -exec gcc -lpigpio -lrt -o build/$uuid '{}' +
+
+# run the program without arguments to display its usage
+./build/$uuid
+
+# uncomment next line to run the program to send a COCO mesage through PIN 17
+# ./build/$uuid 17 -s COCO "[ address 494949, onOff 1, group 0, channel 4598 ]"
+
+# uncomment next line to run the program to send a KFS mesage through PIN 17
+# ./build/$uuid 17 -s KFS "[ identifier 38883 ]"
+
+# uncomment next line to run the program to start receiving on PIN 27
+# ./build/$uuid 27 -r
+
+# uncomment next line to run delete the program after running
+# rm -f build/$uuid
