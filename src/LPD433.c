@@ -118,15 +118,15 @@ bool parseArgs(int argc, char *argv[])
         return false; 
     }
 
-    PIN = atoi(argv[1]);
+    PIN = atoi(argv[2]);
 
     // strcmp returns 0 when strings are equal
-    if (!strcmp(argv[2], "-s")) 
+    if (!strcmp(argv[1], "-s")) 
     {
         mode = OperationModerSending;
         if (5 != argc)
         {
-            printf("Incorrect number of arguments for sending a message. Expecting: PIN -s PROTOCOL \"[key value...]\". Did you forget quotes around the key-value array?\n");
+            printf("Incorrect number of arguments for sending a message. Expecting: -s PIN PROTOCOL \"[key value...]\". Did you forget quotes around the key-value array?\n");
             return false;
         }
 
@@ -263,7 +263,7 @@ bool parseArgs(int argc, char *argv[])
             return true;
         }
     }
-    else if (!strcmp(argv[2], "-r"))
+    else if (!strcmp(argv[1], "-r"))
     {
         if (argc > 3) 
         {
@@ -425,7 +425,7 @@ void printUsage()
     -s  PIN PROTOCOL [messageField value, ...]\n\
         Send a message on the GPIO PIN specified. PROTOCOL should be either `COCO`, for a ClickOnClickOff messate, or KFS for a KeyFobSwitch\n\
         message. All fields are required. Fields and valuetypes:\n\
-        COCO: \"[address <26 bit unsigned integer>, onOff <1 or 0>, group, <1 or 0, channel <16bit unsigned integer>]\"\n\
+        COCO: \"[address <26 bit unsigned integer>, onOff <1 or 0>, group <1 or 0, channel <16bit unsigned integer>]\"\n\
         KFS:  \"[identifier, <24 bit unsigned integer>]\"\n\
         N.b. the array of messageField names and values \e[4mmust\e[0m be enclosed in quotes.\n\
     -r  PIN\n\
@@ -437,10 +437,10 @@ void printUsage()
 \n\
 \e[1mEXAMPLES\e[0m\n\
     Send a COCO message with address 235498, onOff = On, group = Off and channel 4598:\n\
-    LPD433 27 -s \"[address 235498, onOff 1, group, 0, channel 4598]\"\n\
+    LPD433 -s 17 \"[address 235498, onOff 1, group, 0, channel 4598]\"\n\
 \n\
     Send a KFS message with identfier 235498:\n\
-    LPD433 27 -s \"[identifier 235498]\"\n\
+    LPD433 -s 17 \"[identifier 235498]\"\n\
 \n\
 \n\
 \e[1mLPD433\e[0m\n\

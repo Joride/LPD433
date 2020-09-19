@@ -14,7 +14,7 @@ mkdir build > /dev/null 2>&1
 find . -type f -name "*.c" -exec gcc -lpigpio -lrt -o build/$uuid '{}' +
 
 # run the program without arguments to display its usage
-./build/$uuid
+# ./build/$uuid
 
 # uncomment next line to run the program to send a COCO mesage through PIN 17
 # ./build/$uuid 17 -s COCO "[ address 494949, onOff 1, group 0, channel 4598 ]"
@@ -23,7 +23,7 @@ find . -type f -name "*.c" -exec gcc -lpigpio -lrt -o build/$uuid '{}' +
 # ./build/$uuid 17 -s KFS "[ identifier 38883 ]"
 
 # uncomment next line to run the program to start receiving on PIN 27
-# ./build/$uuid 27 -r
+./build/$uuid -r 27
 
 # uncomment next line to run delete the program after running
 # rm -f build/$uuid
